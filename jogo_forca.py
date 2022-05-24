@@ -12,6 +12,7 @@ menu = """
 #                                      #
 #                                      #
 #   GRUPO:                             #
+#   ERICK -                            #
 #   GABRIELA -                         #
 #   GUSTAVO -                          #
 #   ISLA -                             #
