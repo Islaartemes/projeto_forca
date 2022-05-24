@@ -154,3 +154,20 @@ boneco = [
 
 
 ]
+
+while True:
+
+    if opcao_jogo == "1":
+        print(menu)
+        categoria = input("Escolha a categoria: ")
+        categoria_selecionada = ""
+        
+        if (categoria == "1"):
+            categoria_selecionada = "Fruta"
+        elif (categoria == "2"):
+            categoria_selecionada = "Animal"
+        elif (categoria == "3"):
+            categoria_selecionada = "País"
+        else:
+            print("Jogo encerrado!")
+            break
