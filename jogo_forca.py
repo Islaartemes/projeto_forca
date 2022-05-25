@@ -1,6 +1,33 @@
 from ast import While
 import time
 from random import randint
+import pygame
+from pygame.locals import*
+from sys import exit
+
+pygame.init()
+
+pygame.mixer.music.set_volume(0.1)
+musicaForca = pygame.mixer.music.load("fundoMusical.mp3")
+pygame.mixer.music.play(-1)
+
+somAcertoLetra = pygame.mixer.Sound("acertoLetra.wav")
+somAcertoLetra.set_volume(0.2)
+
+somAcertoPalavra = pygame.mixer.Sound("acertoPalavra.wav")
+somAcertoPalavra.set_volume(1.0)
+
+somErro = pygame.mixer.Sound("erro.wav")
+somErro.set_volume(0.4)
+
+somOpcaoInvalida = pygame.mixer.Sound("erroOpcaoInvalida.wav")
+somOpcaoInvalida.set_volume(0.5)
+
+somPerdeu = pygame.mixer.Sound("somPerdeu.wav")
+somPerdeu.set_volume(0.3)
+
+somUhul = pygame.mixer.Sound("uhul.wav")
+somUhul.set_volume(0.5)
 
 
 menu = """
@@ -208,19 +235,25 @@ while True:
         print(menu)
         categoria = input("Escolha a categoria: ")
         categoria_selecionada = ""
+
         
         if (categoria == "1"):
+            somUhul.play()
             categoria_selecionada = "Fruta"
         elif (categoria == "2"):
+            somUhul.play()
             categoria_selecionada = "Animal"
         elif (categoria == "3"):
+            somUhul.play()
             categoria_selecionada = "País"
         elif (categoria == "0"):
             print("\033[1;36mVOCÊ SAIU DO JOGO!\033[m")
+            somErro.play()
             break
         else:
+            somOpcaoInvalida.play()
             print("\033[1;33mOPÇÃO INVÁLIDA!\nTENTE NOVAMENTE!\033[m")
-            time.sleep(1)
+            time.sleep(3)
             continue
 
     lista_categoria_selecionada = categorias[int(categoria)-1]
@@ -260,12 +293,14 @@ while True:
         letra_informada = input("Insira uma letra: ").upper()  
 
         if letra_informada not in alfabeto:
+            somErro.play()
             print("\033[1;31mOPÇÃO INVÁLIDA! TENTE OUTRO CARACTERE.\033[m")
             time.sleep(2)
 
         if letra_informada in corretas or letra_informada in erradas:
+            somOpcaoInvalida.play()
             print("\033[1;91mOPÇÃO JÁ UTILIZADA. TENTE OUTRA LETRA!\033[m")
-            time.sleep(2)
+            time.sleep(3)
             continue   
             
         if letra_informada in palavra_secreta:
@@ -275,6 +310,7 @@ while True:
                 if letra_informada == letra:
                     acertos[posicao] = letra_informada
                 posicao += 1
+                somAcertoLetra.play()
   
 
         elif letra_informada not in alfabeto:
@@ -282,15 +318,21 @@ while True:
 
         else:
                 erradas.append(letra_informada) 
+                somErro.play()
     
 
     if acertou:
         print("\033[1;32mVOCÊ VENCEU!!! PARABÉNS!\033[m")
+        somAcertoPalavra.play()
+        
 
     if enforcou: 
         print("\033[1;31mVOCÊ PERDEU! A PALAVRA SECRETA ERA: \033[m"+ palavra_secreta)
+        somPerdeu.play()       
+        
 
     print(
+
         """
         \033[1;35mQUE TAL JOGAR NOVAMENTE?
         PARA JOGAR NOVAMENTE INSIRA QUALQUER OUTRA TECLA.\033[m
