@@ -1,23 +1,33 @@
+from ast import While
+import time
 from random import randint
 
+
 menu = """
->>>>>>>>>>>>     UNIESP     <<<<<<<<<<<<
-#       INTRODUÇÃO A PROGRAMAÇÃO       #
-#                                      #
-#              CATEGORIA               #     
-#       1- FRUTA                       #
-#       2- ANIMAL                      #
-#       3- PAÍS                        #
-#       DIGITE OUTRA TECLA PARA SAIR   #
-#                                      #
-#                                      #
-#   GRUPO:                             #
-#   ISLA - islaartemes@gmail.com       #
-#   GABRIELA -                         #
-#   GUSTAVO -                          #
-#   LUAN -                             #
-#   Mª ALICE -                         #
-########################################
+\033[1;44m>>>>>>>>>>>>>>>>      UNIESP     <<<<<<<<<<<<<<<<<\033[m
+\033[1;105m#       INTRODUÇÃO A PROGRAMAÇÃO - P1.A          #\033[m
+\033[1;46m#                                                #\033[m
+\033[1;46m#   CATEGORIAS:                                  #\033[m     
+\033[1;46m#     1- FRUTA                                   #\033[m  
+\033[1;46m#     2- ANIMAL                                  #\033[m  
+\033[1;46m#     3- PAÍS                                    #\033[m  
+\033[1;46m#     0- SAIR DO JOGO                            #\033[m  
+\033[1;46m#                                                #\033[m  
+\033[1;105m#                                                #\033[m  
+\033[1;105m#   GRUPO ['A-Z']:                               #\033[m   
+\033[1;105m#   ERYCK - eryck.targino3@gmail.com             #\033[m  
+\033[1;105m#   GABRIELA - sistemasdagab.i@gmail.com         #\033[m  
+\033[1;105m#   GUSTAVO - gustavo.lopes.nobrega@gmail.com    #\033[m
+\033[1;105m#   ISLA - islaartemes@gmail.com                 #\033[m 
+\033[1;105m#   LUAN - luanlucas.r10@hotmail.com             #\033[m  
+\033[1;105m#   Mª ALICE - mariaalice6999@gmail.com          #\033[m
+\033[1;105m#                                                #\033[m  
+\033[1;44m##################################################\033[m  
+
+\033[;1mSEJA BEM VINDX À FORCA! QUE TAL PASSAR O TEMPO JOGANDO UM POUCO?\033[m
+VOCÊ TEM 06 CHANCES PARA DESCOBRIR A PALAVRA SECRETA, ELA ESTÁ RELACIONADA AO TEMA DA CATEGORIA QUE VOCÊ ESCOLHER, SENDO ELAS: \n    > FRUTAS - 1 \n    > ANIMAIS - 2 \n    > PAÍS - 3 \n\n    > SAIR DO JOGO! - 0 \n 
+
+============ AGORA VAMOS COMEÇAR!!!! ============
 
 """
 
@@ -29,9 +39,13 @@ categorias = [
     ["Alemanha","Andorra","Angola","Argentina","Barbados","Belize","Benim","Bielorrússia","Cabo Verde","Camarões","Camboja","Chile","China","Dinamarca","Egito","Equador","Filipinas","Guiana","Holanda","Iraque","Irlanda","Jamaica","Portugal","Turquia","Uruguai"]
 ]
 
+alfabeto = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
 boneco = [
     """
-    ##################
+
+
+######################
 ##              ##
 ##              ##
 ##          ##########
@@ -42,9 +56,14 @@ boneco = [
 ##
 ##
 ##
+
+           \033[1;43mCHANCES = 06\033[m
+
     """, 
     """
-    ##################
+
+
+######################
 ##              ##
 ##              ##
 ##          ##########
@@ -59,9 +78,14 @@ boneco = [
 ##
 ##
 ##
+
+           \033[1;43mCHANCES = 05\033[m
+
     """,
     """
-    ##################
+
+
+######################
 ##              ##
 ##              ##
 ##          ##########
@@ -76,9 +100,14 @@ boneco = [
 ##              *
 ##              *
 ##              *
+
+           \033[1;43mCHANCES = 04\033[m
+           
     """,
     """
-    ##################
+
+
+######################
 ##              ##
 ##              ##
 ##          ##########
@@ -93,9 +122,14 @@ boneco = [
 ##          *   *
 ##              *
 ##              *
+
+           \033[1;43mCHANCES = 03\033[m
+
     """,
     """
-    ##################
+
+
+######################
 ##              ##
 ##              ##
 ##          ##########
@@ -110,9 +144,14 @@ boneco = [
 ##          *   *   *
 ##              *
 ##              *
+
+           \033[1;43mCHANCES = 02\033[m
+
     """,
     """
-    ##################
+
+
+######################
 ##              ##
 ##              ##
 ##          ##########
@@ -130,9 +169,14 @@ boneco = [
               *****
              *
             *
+            
+           \033[1;43mCHANCES = 01\033[m
+
     """,
     """
-    ##################
+
+
+######################
 ##              ##
 ##              ##
 ##          ##########
@@ -150,6 +194,9 @@ boneco = [
               *****
              *     *
             *       *
+
+           \033[1;41mCHANCES = 00\033[m
+
     """
 
 
@@ -168,9 +215,13 @@ while True:
             categoria_selecionada = "Animal"
         elif (categoria == "3"):
             categoria_selecionada = "País"
-        else:
-            print("Jogo encerrado!")
+        elif (categoria == "0"):
+            print("\033[1;36mVOCÊ SAIU DO JOGO!\033[m")
             break
+        else:
+            print("\033[1;33mOPÇÃO INVÁLIDA!\nTENTE NOVAMENTE!\033[m")
+            time.sleep(1)
+            continue
 
     lista_categoria_selecionada = categorias[int(categoria)-1]
 
@@ -181,6 +232,7 @@ while True:
     acertos = [ "_" for letra in palavra_secreta ]
     corretas = []
     erradas = []
+    caracteresNulos = []
 
 
     while True:    
@@ -203,9 +255,19 @@ while True:
         if len(erradas) == 6:
             enforcou = True
             break
+        
+        
+        letra_informada = input("Insira uma letra: ").upper()  
 
-        letra_informada = input("Insira uma letra: ").upper()
+        if letra_informada not in alfabeto:
+            print("\033[1;31mOPÇÃO INVÁLIDA! TENTE OUTRO CARACTERE.\033[m")
+            time.sleep(2)
 
+        if letra_informada in corretas or letra_informada in erradas:
+            print("\033[1;91mOPÇÃO JÁ UTILIZADA. TENTE OUTRA LETRA!\033[m")
+            time.sleep(2)
+            continue   
+            
         if letra_informada in palavra_secreta:
             corretas.append(letra_informada)
             posicao = 0
@@ -213,6 +275,26 @@ while True:
                 if letra_informada == letra:
                     acertos[posicao] = letra_informada
                 posicao += 1
+  
+
+        elif letra_informada not in alfabeto:
+                caracteresNulos.append(letra_informada)
 
         else:
-            erradas.append(letra_informada)
+                erradas.append(letra_informada) 
+    
+
+    if acertou:
+        print("\033[1;32mVOCÊ VENCEU!!! PARABÉNS!\033[m")
+
+    if enforcou: 
+        print("\033[1;31mVOCÊ PERDEU! A PALAVRA SECRETA ERA: \033[m"+ palavra_secreta)
+
+    print(
+        """
+        \033[1;35mQUE TAL JOGAR NOVAMENTE?
+        PARA JOGAR NOVAMENTE INSIRA QUALQUER OUTRA TECLA.\033[m
+        """
+    )
+    
+    opcao_jogo = input()
