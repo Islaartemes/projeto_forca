@@ -15,7 +15,7 @@ menu = """
 #   ISLA - islaartemes@gmail.com       #
 #   GABRIELA -                         #
 #   GUSTAVO -                          #
-#   LUAN -  luanlucas.r10@hotmail.com  #
+#   LUAN -                             #
 #   Mª ALICE -                         #
 ########################################
 
@@ -171,3 +171,14 @@ while True:
         else:
             print("Jogo encerrado!")
             break
+
+    lista_categoria_selecionada = categorias[int(categoria)-1]
+
+    palavra_secreta = lista_categoria_selecionada[randint(0,len(lista_categoria_selecionada)-1)].upper()
+
+    acertou = False
+    enforcou = False
+    acertos = [ "_" for letra in palavra_secreta ]
+    corretas = []
+    erradas = []
+
