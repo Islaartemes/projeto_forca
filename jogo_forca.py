@@ -182,3 +182,37 @@ while True:
     corretas = []
     erradas = []
 
+
+    while True:    
+        print(f"Categoria: {categoria_selecionada}")
+        print(boneco[len(erradas)])
+        
+        
+        print("Palavra: " + " ".join (acertos))
+
+        print("Letras Informadas: ")
+
+        print("Corretas: " + ", ".join(corretas))
+        
+        print("Erradas: " + ", ".join(erradas))
+
+        if "".join(acertos) == palavra_secreta:
+            acertou = True
+            break
+
+        if len(erradas) == 6:
+            enforcou = True
+            break
+
+        letra_informada = input("Insira uma letra: ").upper()
+
+        if letra_informada in palavra_secreta:
+            corretas.append(letra_informada)
+            posicao = 0
+            for letra in palavra_secreta:
+                if letra_informada == letra:
+                    acertos[posicao] = letra_informada
+                posicao += 1
+
+        else:
+            erradas.append(letra_informada)
